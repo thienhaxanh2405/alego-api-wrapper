@@ -98,7 +98,6 @@ class Client implements IClient
 
     public function getBalance()
     {
-
         return $this->httpClient->request(ApiAction::GET_BALANCE, []);
     }
 

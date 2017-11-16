@@ -54,7 +54,7 @@ class Message
     public static function getAlegoMessage($code)
     {
         if(isset(self::$alegoMessage[$code])) {
-            return self::$alegoMessage[$code];
+            return self::$alegoMessage[$code]."({$code})";
         } else {
             return "Mã thông báo không tồn tại";
         }
