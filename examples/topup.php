@@ -41,10 +41,11 @@ if ($_POST) {
         ]
     );
 
-    $client = \AlegoApiWrapper\Client::createClient($account);
+    $client = \AlegoApiWrapper\Client::createClient($account, true);
 
     $buyCard = new BuyPrepaidCard(
         [
+            'referNumber' => uniqid(),
             'productCode' => $products[$type][$telco],
             'telco' => $telco,
             'type' => $type,
@@ -61,7 +62,13 @@ if ($_POST) {
         $res = null;
     }
 
+    /*echo "<pre>";
+    echo "Result: <br />";
     var_dump($res);
+
+    echo "<br /><br />";
+
+    var_dump($res->getResult());*/
 
 } else {
     $product = $telco = $type = $cellphone = $cardPrice = null;
@@ -106,7 +113,7 @@ if ($_POST) {
         </tr>
         <tr>
             <td>Điện thoại đi động</td>
-            <td><input type="text" name="CustMobile" value="<?=$cellphone?>" /></td>
+            <td><input type="text" name="cellphone" value="<?=$cellphone?>" /></td>
         </tr>
         <tr>
             <td></td>

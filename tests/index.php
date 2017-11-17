@@ -12,7 +12,7 @@ $account = new \AlegoApiWrapper\Connection\Account(
 $client = \AlegoApiWrapper\Client::createClient($account, true);
 
 // buy prepaid card
-/*$buyCard = new \AlegoApiWrapper\Resource\BuyPrepaidCard(
+$buyCard = new \AlegoApiWrapper\Resource\BuyPrepaidCard(
     [
         'referNumber' => uniqid(),
         'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::PREPAID_CARD_VIETTEL,
@@ -22,10 +22,9 @@ $client = \AlegoApiWrapper\Client::createClient($account, true);
     ]
 );
 
-$res = $client->buyPrepaidCard($buyCard);
+//$res = $client->buyPrepaidCard($buyCard);
 
-echo "<pre>";
-*/
+
 
 // prepaid top
 /*$topUpPrepaid = new \AlegoApiWrapper\Resource\BuyPrepaidCard(
@@ -42,7 +41,10 @@ echo "<pre>";
 var_dump($res);*/
 
 
-$res = $client->getBalance();
+//$res = $client->getBalance();
 
 // var dump result
-var_dump($res);
+//echo "<pre>";
+//var_dump($res);
+
+var_dump(\AlegoApiWrapper\Connection\RequestData::decrypt("Vh0P3sraRCegk4Kh1vFMwyFt0aAF76ol7J3/9+17fT3LEZpvWHnQTGF/azpWlQWu3miQ5L5CDJkreCC0RNR+fxflwJdWn/p1jFYlSWeMpPS0LcfoKmeQFt9TLisIn430mZLOynp9ffdIEIughIrAnnSrwEKCYqLH3RJo5dYfGOgaKgofIUBO20RkFWsr9zs4aXG9Lp7r7k8="));

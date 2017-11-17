@@ -9,20 +9,18 @@ use AlegoApiWrapper\Constant\PrepaidCardPrice;
 
 if ($_POST) {
     $telco = $_POST['telco'];
-    $type = $_POST['type'];
+    $type = AlegoTransactionType::BUY_PREPAID_CARD;
     $cardPrice = $_POST['cardPrice'];
     $cardQuantity = $_POST['cardQuantity'];
 
     $products = [
         AlegoTransactionType::BUY_PREPAID_CARD => [
-            Telco::VIETTEL_CODE => [
-                Telco::VIETTEL_CODE => AlegoProduct::PREPAID_CARD_VIETTEL,
-                Telco::MOBIFONE_CODE => 501,
-                Telco::VINAPHONE_CODE => 502,
-                Telco::SFONE_CODE => 503,
-                Telco::GMobile_CODE => 504,
-                Telco::VIETNAMEMOBILE_CODE => 505,
-            ]
+            Telco::VIETTEL_CODE => AlegoProduct::PREPAID_CARD_VIETTEL,
+            Telco::MOBIFONE_CODE => 501,
+            Telco::VINAPHONE_CODE => 502,
+            Telco::SFONE_CODE => 503,
+            Telco::GMobile_CODE => 504,
+            Telco::VIETNAMEMOBILE_CODE => 505,
         ]
     ];
 
@@ -39,6 +37,7 @@ if ($_POST) {
 
     $buyCard = new BuyPrepaidCard(
         [
+            'referNumber' => uniqid(),
             'productCode' => $products[$type][$telco],
             'telco' => $telco,
             'type' => $type,
@@ -53,7 +52,7 @@ if ($_POST) {
         $res = null;
     }
 
-    var_dump($res);
+    //var_dump($res);
 
 } else {
     $product = $telco = $type = $cellphone = $cardPrice = $cardQuantity = null;

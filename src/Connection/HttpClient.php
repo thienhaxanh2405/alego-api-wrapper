@@ -29,6 +29,8 @@ class HttpClient implements IHttpClient
     /** @var array $sentData the data for api */
     private $sentData;
 
+    private $isDebug;
+
     /**
      * Follow the action, validate service data passed
      *
@@ -209,6 +211,24 @@ class HttpClient implements IHttpClient
     }
 
     /**
+     * @return mixed
+     */
+    public function getIsDebug()
+    {
+        return $this->isDebug;
+    }
+
+    /**
+     * @param mixed $isDebug
+     */
+    public function setIsDebug($isDebug)
+    {
+        $this->isDebug = $isDebug;
+    }
+
+
+
+    /**
      * @param string $action
      * @param array  $serviceData
      *
@@ -227,6 +247,24 @@ class HttpClient implements IHttpClient
 
                 // process response
                 $res->processData($action, $raw);
+
+                if ($this->isDebug === true) {
+                    echo "<pre>";
+                    print("Service data: ");
+                    var_dump($serviceData);
+
+                    print("\nAPI Data before sent: ");
+                    var_dump($this->sentData);
+
+                    print("\nRaw data: ");
+                    var_dump($raw);
+                    print("Het raw data");
+
+                    print("\nAPI Response: ");
+                    var_dump($res);
+
+                    print("Message: ".$res->getMessage());
+                }
             } catch (\Exception $e) {
                 $res->setMessageCode(Message::CALL_API_WITH_ERROR);
                 $res->setMessage(Message::getMessage(Message::CALL_API_WITH_ERROR).": ".$e->getMessage());
@@ -245,7 +283,7 @@ class HttpClient implements IHttpClient
      * @param IAuth  $auth
      * @param string $apiBaseUrl
      */
-    public function __construct(IAuth $auth, $apiBaseUrl = "" )
+    public function __construct(IAuth $auth, $apiBaseUrl = "")
     {
         if ($apiBaseUrl) {
             $this->apiBaseUrl = $apiBaseUrl;
@@ -260,6 +298,8 @@ class HttpClient implements IHttpClient
                 'version' => Api::VERSION,
             ]
         );
+
+        $this->isDebug = true;
     } // end construct
 
 } // end class
