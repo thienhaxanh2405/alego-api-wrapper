@@ -49,7 +49,7 @@ Qua composer:
 
 ## Thông tin kết nối
 
-Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
+1.Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
 Sử dụng thông tin kết nối để khởi tạo đối tượng Account.
 
 ```
@@ -58,16 +58,16 @@ use AlegoApiWrapper\Connection\Account;
 // thông tin account bên dưới là tài khoản test của Alego
 // thay thế bằng thông tin tài khoản của bạn
 $account = new Account(
-         [
-             'agentId' => 1,
-             'accountId' => '571a01a0e4b0b96b6f950ad5',
-             'keyMD5' => 'adrMjEJArHysrhwM',
-             'tripleKey' => 'asdf'
-         ]
-     );
- ```
+     [
+         'agentId' => 1,
+         'accountId' => '571a01a0e4b0b96b6f950ad5',
+         'keyMD5' => 'adrMjEJArHysrhwM',
+         'tripleKey' => 'asdf'
+     ]
+);
+```
  
-Khởi tạo đối tượng Client để thực hiện các giao dịch
+2.Khởi tạo đối tượng Client để thực hiện các giao dịch
 ```
 use AlegoApiWrapper\Client;
 
