@@ -52,7 +52,7 @@ Qua composer:
 1.Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
 Sử dụng thông tin kết nối để khởi tạo đối tượng Account.
 
-```
+```php
 use AlegoApiWrapper\Connection\Account;
 
 // thông tin account bên dưới là tài khoản test của Alego
