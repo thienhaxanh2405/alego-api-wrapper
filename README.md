@@ -48,7 +48,8 @@ Qua composer:
 - **\AlegoApiWrapper\Constant\AlegoTransactionType**: Loại giao dịch trên hệ thống Alego.
 
 ## Thông tin kết nối
-1. Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
+
+Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
 Sử dụng thông tin kết nối để khởi tạo đối tượng Account.
 
 ```
@@ -65,9 +66,9 @@ $account = new Account(
          ]
      );
  ```
-2. Khởi tạo đối tượng Client để thực hiện các giao dịch
+ 
+Khởi tạo đối tượng Client để thực hiện các giao dịch
 ```
-
 use AlegoApiWrapper\Client;
 
 $client = Client::createClient($account);
@@ -75,7 +76,6 @@ $client = Client::createClient($account);
 // bạn có thể thêm 2 tham số vào hàm sau $account cho hàm createClient
 // $isDevelopment = true và $debug = 1
 // $client = Client::createClient($account, true, 1);
-
 ```
 
 ## Sử dụng
@@ -106,7 +106,6 @@ $buyCard = new Buy(
 );
 
 $res = $client->buyPrepaidCard($buyCard);
-
 ```
 ### Nạp tiền điện thoại
 Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số:
@@ -136,7 +135,6 @@ $buy = new \AlegoApiWrapper\Resource\BuyPrepaidCard(
 );
 
 $res = $client->prepaidTopUp($buy);
-
 ```
 ### Mua mã thẻ Game
 Cập nhật trong thời gian tới
