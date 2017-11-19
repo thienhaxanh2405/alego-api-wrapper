@@ -259,12 +259,12 @@ class HttpClient implements IHttpClient
 
                     print("\nRaw data: ");
                     var_dump($raw);
-                    print("End of raw data");
+                    print("\nEnd of raw data");
 
                     print("\nAPI Response: ");
                     var_dump($res);
 
-                    print("Message: ".$res->getMessage());
+                    print("\nMessage: ".$res->getMessage());
                 }
             } catch (\Exception $e) {
                 $res->setMessageCode(Message::CALL_API_WITH_ERROR);

@@ -44,7 +44,7 @@ if ($_POST) {
     // create a buy card object
     $buyCard = new Buy(
         [
-            'referNumber' => uniqid(),
+            'referOrder' => uniqid(),
             'productCode' => $products[$type][$telco],
             'telco' => $telco,
             'type' => $type,
