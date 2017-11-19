@@ -73,10 +73,9 @@ $client = Client::createClient($account);
 ```
 
 ## Sử dụng
-
 ### Mua thẻ cào điện thoại
-Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số:
-- **referOrder**: mã tham chiếu trên hệ thống của bạn, có thể là id hoặc một mã đơn hàng **_duy nhất_** trên hệ thống của bạn tương ứng với giao dịch này.<enter>
+Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số
+- **referOrder**: mã tham chiếu trên hệ thống của bạn, có thể là id hoặc một mã đơn hàng **_duy nhất_** trên hệ thống của bạn tương ứng với giao dịch này.
 - **productCode**: mã sản phẩm dịch vủa Alego tương ứng với giao dịch mua thẻ cào. Đã được định nghĩa sẵn các hằng số trong **_AlegoApiWrapper\Constant\AlegoProduct_** để bạn có thể dễ dàng gọi và sử dụng.
 - **telco**:  mã nhà mạng. Đã được định nghĩa sẵn trong **_AlegoApiWrapper\Constant\Telco_**.
 - **cardPrice**: mệnh giá thẻ cào. Đã được định nghĩa sẵn trong **_AlegoApiWrapper\Constant\PrepaidCardPrice_**.
@@ -90,20 +89,18 @@ use AlegoApiWrapper\Constant\AlegoTransactionType;
 use AlegoApiWrapper\Resource\Buy;
 use AlegoApiWrapper\Constant\PrepaidCardPrice;
 
-$buyCard = new Buy(
-   [
-       'referOrder' => uniqid(),
-       'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::PREPAID_CARD_VIETTEL,
-       'telco' => \AlegoApiWrapper\Constant\Telco::VIETTEL_CODE,
-       'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,
-       'cardQuantity' => 1
-   ]
-);
+$buyCard = new Buy([
+    'referOrder' => uniqid(),
+    'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::PREPAID_CARD_VIETTEL,
+    'telco' => \AlegoApiWrapper\Constant\Telco::VIETTEL_CODE,
+    'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,
+    'cardQuantity' => 1
+]);
 
 $res = $client->buyPrepaidCard($buyCard);
 ```
 ### Nạp tiền điện thoại
-Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số:
+Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số
 - **referOrder**: mã tham chiếu trên hệ thống của bạn, có thể là id hoặc một mã đơn hàng **_duy nhất_** trên hệ thống của bạn tương ứng với giao dịch này.
 - **productCode**: mã sản phẩm dịch vủa Alego tương ứng với giao dịch mua thẻ cào. Đã được định nghĩa sẵn các hằng số trong **_AlegoApiWrapper\Constant\AlegoProduct_** để bạn có thể dễ dàng gọi và sử dụng.
 - **telco**:  mã nhà mạng. Đã được định nghĩa sẵn trong **_AlegoApiWrapper\Constant\Telco_**.
@@ -111,7 +108,7 @@ Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối th
 - **customerCellphone**: số điện thoại được nạp tiền
 - **type**: loại giao dịch trên hệ thống Alego. Nạp tiền cho thuê bao trả trước: **_AlegoTransactionType::TOPUP_PREPAID_** hoặc Nạp tiền cho thuê bao trả sau: **_AlegoTransactionType::TOPUP_POSTPAID_**
 
-Ví dụ nạp tiền cho thuê bao: 0987802175 của nhà mạng Viettel số tiền 100 000đ.
+Ví dụ nạp tiền cho thuê bao: 0987 802 175 của nhà mạng Viettel số tiền 100 000đ.
 ```
 use AlegoApiWrapper\Constant\AlegoProduct;
 use AlegoApiWrapper\Constant\Telco;
@@ -119,15 +116,13 @@ use AlegoApiWrapper\Constant\AlegoTransactionType;
 use AlegoApiWrapper\Resource\Buy;
 use AlegoApiWrapper\Constant\PrepaidCardPrice;
 
-$buy = new \AlegoApiWrapper\Resource\BuyPrepaidCard(
-   [
-       'referOrder' => uniqid(),
-       'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::TOPUP_PREPAID_VIETTEL,
-       'telco' => \AlegoApiWrapper\Constant\Telco::VIETTEL_CODE,
-       'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,
-       'customerCellphone' => "0987802175"
-   ]
-);
+$buy = new \AlegoApiWrapper\Resource\BuyPrepaidCard([
+    'referOrder' => uniqid(),
+    'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::TOPUP_PREPAID_VIETTEL,
+    'telco' => \AlegoApiWrapper\Constant\Telco::VIETTEL_CODE,
+    'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,
+    'customerCellphone' => "0987802175"
+]);
 
 $res = $client->prepaidTopUp($buy);
 ```
@@ -143,7 +138,7 @@ Cập nhật trong thời gian tới
 ### Kiểm tra giao dịch
 Sử dụng mã referOrder trên hệ thống của bạn để tham chiếu tới giao dịch trên hệ thống Alego.
 
-Ví dụ bạn kiểm tra có mã trên hệ thống của bạn là: **_5a119e3c6cfb0_**
+Ví dụ bạn kiểm tra có mã trên hệ thống của bạn là: **_order_5a119e3c6cfb0_**
 
 ```
 $res = $client->checkOrder("5a119e3c6cfb0");
