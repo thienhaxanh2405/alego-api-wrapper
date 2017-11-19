@@ -69,6 +69,9 @@ Khởi tạo đối tượng Client để thực hiện các giao dịch
 use AlegoApiWrapper\Client;
 
 $client = Client::createClient($account);
+// Trường hợp trên môi trường Dev và muốn dump dữ liệu để debug
+// truyền thêm 2 tham số isDevelopment và isDebug
+// $client = Client::createClient($account, true, 1);
 ```
 
 ## Sử dụng
