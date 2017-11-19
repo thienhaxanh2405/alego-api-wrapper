@@ -8,7 +8,7 @@ use AlegoApiWrapper\Constant\ApiAction;
 use AlegoApiWrapper\Contract\IAuth;
 use AlegoApiWrapper\Contract\IClient;
 use AlegoApiWrapper\Contract\IHttpClient;
-use AlegoApiWrapper\Resource\BuyPrepaidCard;
+use AlegoApiWrapper\Resource\Buy;
 
 class Client implements IClient
 {
@@ -78,54 +78,69 @@ class Client implements IClient
     } // end class
 
     /**
-     * @param BuyPrepaidCard $card
+     * @param Buy $buy
      *
-     * @return mixed
+     * @return Resource\ApiResponse
      */
-    public function buyPrepaidCard(BuyPrepaidCard $card)
+    public function buyPrepaidCard(Buy $buy)
     {
         $serviceData = [
-            'ProductCode' => $card->getProductCode(),
-            'RefNumber' => $card->getReferNumber(),
-            'Telco' => $card->getTelco(),
+            'ProductCode' => $buy->getProductCode(),
+            'RefNumber' => $buy->getReferOrder(),
+            'Telco' => $buy->getTelco(),
             'Type' => AlegoTransactionType::BUY_PREPAID_CARD,
-            'CardPrice' => $card->getCardPrice(),
-            'CardQuantity' => $card->getCardQuantity(),
+            'CardPrice' => $buy->getCardPrice(),
+            'CardQuantity' => $buy->getCardQuantity(),
         ];
 
         return $this->httpClient->request(ApiAction::BUY_PREPAID_CARD, $serviceData);
     } // end buy card
 
-    public function prepaidTopUp(BuyPrepaidCard $card)
+    /**
+     * @param Buy $buy
+     *
+     * @return Resource\ApiResponse
+     */
+    public function prepaidTopUp(Buy $buy)
     {
         $serviceData = [
-            'ProductCode' => $card->getProductCode(),
-            'RefNumber' => $card->getReferNumber(),
-            'Telco' => $card->getTelco(),
+            'ProductCode' => $buy->getProductCode(),
+            'RefNumber' => $buy->getReferOrder(),
+            'Telco' => $buy->getTelco(),
             'Type' => AlegoTransactionType::TOPUP_PREPAID,
-            'CardPrice' => $card->getCardPrice(),
+            'CardPrice' => $buy->getCardPrice(),
             'CardQuantity' => 1,
-            'CustMobile' => $card->getCustomerCellphone()
+            'CustMobile' => $buy->getCustomerCellphone()
         ];
 
         return $this->httpClient->request(ApiAction::PREPAID_TOPUP, $serviceData);
     } // end prepaid top up
 
-    public function postpaidTopUp(BuyPrepaidCard $card)
+    /**
+     * @param Buy $buy
+     *
+     * @return Resource\ApiResponse
+     */
+    public function postpaidTopUp(Buy $buy)
     {
         $serviceData = [
-            'ProductCode' => $card->getProductCode(),
-            'RefNumber' => $card->getReferNumber(),
-            'Telco' => $card->getTelco(),
+            'ProductCode' => $buy->getProductCode(),
+            'RefNumber' => $buy->getReferOrder(),
+            'Telco' => $buy->getTelco(),
             'Type' => AlegoTransactionType::TOPUP_POSTPAID,
-            'CardPrice' => $card->getCardPrice(),
+            'CardPrice' => $buy->getCardPrice(),
             'CardQuantity' => 1,
-            'CustMobile' => $card->getCustomerCellphone()
+            'CustMobile' => $buy->getCustomerCellphone()
         ];
 
         return $this->httpClient->request(ApiAction::POSTPAID_TOPUP, $serviceData);
     } // end postpaid top up
 
+    /**
+     * @param $myReferNumber
+     *
+     * @return Resource\ApiResponse
+     */
     public function checkOrder($myReferNumber)
     {
         $serviceData = [
@@ -133,11 +148,14 @@ class Client implements IClient
         ];
 
         return $this->httpClient->request(ApiAction::CHECK_ORDER, $serviceData);
-    }
+    } // end check order
 
+    /**
+     * @return Resource\ApiResponse
+     */
     public function getBalance()
     {
         return $this->httpClient->request(ApiAction::GET_BALANCE, []);
-    }
+    } // end get balance
 
 } // end class

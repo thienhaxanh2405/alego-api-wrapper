@@ -1,15 +1,15 @@
 <?php
 namespace AlegoApiWrapper\Contract;
 
-use AlegoApiWrapper\Resource\BuyPrepaidCard;
+use AlegoApiWrapper\Resource\Buy;
 
 interface IClient
 {
-    public function buyPrepaidCard(BuyPrepaidCard $card);
+    public function buyPrepaidCard(Buy $card);
 
-    public function prepaidTopUp(BuyPrepaidCard $card);
+    public function prepaidTopUp(Buy $card);
 
-    public function postpaidTopUp(BuyPrepaidCard $card);
+    public function postpaidTopUp(Buy $card);
 
     public function checkOrder($myReferNumber);
 

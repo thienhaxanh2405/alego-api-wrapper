@@ -248,7 +248,7 @@ class HttpClient implements IHttpClient
                 $res->processData($action, $raw);
 
                 // todo this piece of code is quite stupid, need to rewrite =))
-                // should have debug modes: 0 - none; 1 - dump data; 2 write to log file; 3 - .... and something else.
+                // todo should have debug modes: 0 - none; 1 - dump data; 2 write to log file; 3 - .... and something else.
                 if ($this->isDebug == 1) {
                     echo "<pre>";
                     print("Service data: ");
@@ -259,7 +259,7 @@ class HttpClient implements IHttpClient
 
                     print("\nRaw data: ");
                     var_dump($raw);
-                    print("Het raw data");
+                    print("End of raw data");
 
                     print("\nAPI Response: ");
                     var_dump($res);
@@ -294,6 +294,7 @@ class HttpClient implements IHttpClient
         $this->isDebug = $isDebug;
 
         // just get account info and set into api request
+        // todo $auth->get function =))
         $this->apiRequest = new ApiRequest(
             [
                 'agentId' => $auth->getAgentId(),
