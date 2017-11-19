@@ -14,7 +14,7 @@ $client = \AlegoApiWrapper\Client::createClient($account, true);
 // buy prepaid card
 $buyCard = new \AlegoApiWrapper\Resource\Buy(
     [
-        'referNumber' => uniqid(),
+        'referOrder' => uniqid(),
         'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::PREPAID_CARD_VIETTEL,
         'telco' => \AlegoApiWrapper\Constant\Telco::VIETTEL_CODE,
         'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,

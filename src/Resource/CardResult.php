@@ -3,20 +3,32 @@ namespace AlegoApiWrapper\Resource;
 
 class CardResult extends Resource
 {
+    /** @var int $productCode Alego product code */
     private $productCode;
 
-    private $referNumber;
+    /** @var string $referOrder refer transaction or order in your system */
+    private $referOrder;
 
+    /** @var string $alegoTransactionId Alego transaction id */
     private $alegoTransactionId;
 
+    /** @var int $time transaction time on Alego, in timestamp */
     private $time;
 
+    /** @var int $responseType Alego return result through 1 - email; 2 - directly in api */
     private $responseType;
 
+    /** @var int $cardQuantity */
     private $cardQuantity;
 
+    /** @var mixed|PrepaidCard[]|... array cards */
     private $cards;
 
+    /**
+     * CardResult constructor.
+     *
+     * @param null $resources
+     */
     public function __construct($resources = null)
     {
         parent::__construct($resources);
@@ -41,17 +53,17 @@ class CardResult extends Resource
     /**
      * @return mixed
      */
-    public function getReferNumber()
+    public function getReferOrder()
     {
-        return $this->referNumber;
+        return $this->referOrder;
     }
 
     /**
-     * @param mixed $referNumber
+     * @param mixed $referOrder
      */
-    public function setReferNumber($referNumber)
+    public function setReferOrder($referOrder)
     {
-        $this->referNumber = $referNumber;
+        $this->referOrder = $referOrder;
     }
 
     /**
@@ -133,6 +145,5 @@ class CardResult extends Resource
     {
         $this->cards = $cards;
     }
-
 
 } // end class

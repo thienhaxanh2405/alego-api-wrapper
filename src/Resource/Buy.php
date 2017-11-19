@@ -141,7 +141,7 @@ class Buy extends Resource
      */
     public function setCardQuantity($cardQuantity)
     {
-        $this->cardQuantity = $cardQuantity;
+        $this->cardQuantity = (int) $cardQuantity;
     }
 
     /**

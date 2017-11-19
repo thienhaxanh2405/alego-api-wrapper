@@ -83,7 +83,7 @@ class ApiResponse extends Resource implements
             case ApiAction::CHECK_ORDER:
                 $result = new CardResult(
                     [
-                        'referNumber' => $decryptData['RefNumber'],
+                        'referOrder' => $decryptData['RefNumber'],
                         'productCode' => $decryptData['ProductCode'],
                         'alegoTransactionId' => $decryptData['TransID'],
                         'time' => $this->convertToTimeStamp($decryptData['TransDate']),

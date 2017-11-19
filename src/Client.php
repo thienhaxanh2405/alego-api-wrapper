@@ -39,11 +39,17 @@ class Client implements IClient
 
     } // end create client
 
+    /**
+     * Client constructor.
+     *
+     * @param IHttpClient $httpRequest
+     * @param int         $isDebug
+     */
     public function __construct(IHttpClient $httpRequest, $isDebug = 0)
     {
         $this->httpClient = $httpRequest;
         $this->isDebug = $isDebug;
-    }
+    } // end construct
 
     /**
      * @return int
