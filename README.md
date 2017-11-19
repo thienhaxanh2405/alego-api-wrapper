@@ -89,7 +89,6 @@ Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối th
 
 Ví dụ mua 01 thẻ Viettel mệnh giá 100 000đ.
 ```
-
 use AlegoApiWrapper\Constant\AlegoProduct;
 use AlegoApiWrapper\Constant\Telco;
 use AlegoApiWrapper\Constant\AlegoTransactionType;
