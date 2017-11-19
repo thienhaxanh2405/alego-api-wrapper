@@ -40,6 +40,7 @@ class Message
         '97' => 'Kênh hiện chưa được khai báo vui lòng liên hệ Alego hỗ trợ',
         '98' => 'Kết nối theo yêu cầ u không tồ n tại hoặc chưa được khai báo',
         '99' => 'Lỗi không xác định',
+        '111' => 'Mã giao dịch không tồn tại',
     ];
 
     public static function getMessage($code)

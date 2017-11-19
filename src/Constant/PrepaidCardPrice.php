@@ -13,9 +13,9 @@ class PrepaidCardPrice
 
     const C_50 = 50000;
 
-    const C_30 = 300000;
+    const C_30 = 30000;
 
-    const C_20 = 200000;
+    const C_20 = 20000;
 
     const C_10 = 10000;
 

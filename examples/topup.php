@@ -7,11 +7,7 @@ use AlegoApiWrapper\Resource\BuyPrepaidCard;
 use AlegoApiWrapper\Constant\PrepaidCardPrice;
 
 if ($_POST) {
-    $telco = $_POST['telco'];
-    $type = $_POST['type'];
-    $cellphone = $_POST['cellphone'];
-    $cardPrice = $_POST['cardPrice'];
-
+    // define an array contain Alego's product code
     $products = [
         AlegoTransactionType::TOPUP_PREPAID => [
             Telco::VIETTEL_CODE => 600,
@@ -31,6 +27,14 @@ if ($_POST) {
         ]
     ];
 
+    // input
+    $telco = $_POST['telco'];
+    $type = $_POST['type'];
+    $cellphone = $_POST['cellphone'];
+    $cardPrice = $_POST['cardPrice'];
+
+    // api account
+    // this below info is Alego account test, in production, use yours.
     $account = new \AlegoApiWrapper\Connection\Account(
         [
             'agentId' => 1,
@@ -41,9 +45,9 @@ if ($_POST) {
     );
 
     // create client
-    $client = \AlegoApiWrapper\Client::createClient($account, true);
+    $client = \AlegoApiWrapper\Client::createClient($account, true, 1);
 
-    //
+    // create a buy card object
     $buyCard = new BuyPrepaidCard(
         [
             'referNumber' => uniqid(),
@@ -56,20 +60,17 @@ if ($_POST) {
     );
 
     if ($type == AlegoTransactionType::TOPUP_PREPAID) {
+        // prepaid topup
         $res = $client->prepaidTopUp($buyCard);
     } elseif ($type == AlegoTransactionType::TOPUP_POSTPAID) {
+        // post paid topup
         $res = $client->postpaidTopUp($buyCard);
     } else {
         $res = null;
     }
 
-    /*echo "<pre>";
-    echo "Result: <br />";
+    echo "<pre>";
     var_dump($res);
-
-    echo "<br /><br />";
-
-    var_dump($res->getResult());*/
 
 } else {
     $product = $telco = $type = $cellphone = $cardPrice = null;
@@ -89,12 +90,12 @@ if ($_POST) {
                     <option <?=($type == AlegoTransactionType::TOPUP_POSTPAID ? 'selected' : "")?> value="TELCO_TOPUP_AFTER">Nạp tiền thuê bao trả sau (TOPUP_AFTER)</option>
                 </select>
                 <select id="" name="telco">
-                    <option <?=($telco == Telco::VIETTEL_CODE ? 'selected' : "")?> value="VTT">Thẻ Viettel</option>
-                    <option <?=($telco == Telco::MOBIFONE_CODE ? 'selected' : "")?> value="VMS">Thẻ MobiFone</option>
-                    <option <?=($telco == Telco::VINAPHONE_CODE ? 'selected' : "")?> value="VNP">Thẻ VinaPhone</option>
-                    <option <?=($telco == Telco::VIETNAMEMOBILE_CODE ? 'selected' : "")?> value="VNM">Thẻ VietnamMobile</option>
-                    <option <?=($telco == Telco::GMobile_CODE ? 'selected' : "")?> value="GTEL">Thẻ Gmobile</option>
-                    <option <?=($telco == Telco::SFONE_CODE ? 'selected' : "")?> value="SFONE">Thẻ Sfone</option>
+                    <option <?=($telco == Telco::VIETTEL_CODE ? 'selected' : "")?> value="VTT">Viettel</option>
+                    <option <?=($telco == Telco::MOBIFONE_CODE ? 'selected' : "")?> value="VMS">MobiFone</option>
+                    <option <?=($telco == Telco::VINAPHONE_CODE ? 'selected' : "")?> value="VNP">VinaPhone</option>
+                    <option <?=($telco == Telco::VIETNAMEMOBILE_CODE ? 'selected' : "")?> value="VNM">VietnamMobile</option>
+                    <option <?=($telco == Telco::GMobile_CODE ? 'selected' : "")?> value="GTEL">Gmobile</option>
+                    <option <?=($telco == Telco::SFONE_CODE ? 'selected' : "")?> value="SFONE">Sfone</option>
                 </select>
             </td>
         </tr>

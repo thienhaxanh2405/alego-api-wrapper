@@ -8,22 +8,27 @@ use AlegoApiWrapper\Resource\BuyPrepaidCard;
 use AlegoApiWrapper\Constant\PrepaidCardPrice;
 
 if ($_POST) {
+    // define an array contain Alego's product code
+    $products = [
+        AlegoTransactionType::BUY_PREPAID_CARD => [
+            Telco::VIETTEL_CODE => AlegoProduct::PREPAID_CARD_VIETTEL,
+            Telco::MOBIFONE_CODE => AlegoProduct::PREPAID_CARD_MOBIFONE,
+            Telco::VINAPHONE_CODE => AlegoProduct::PREPAID_CARD_VINAPHONE,
+            Telco::SFONE_CODE => AlegoProduct::PREPAID_CARD_SFONE,
+            Telco::GMobile_CODE => AlegoProduct::PREPAID_CARD_GMOBILE,
+            Telco::VIETNAMEMOBILE_CODE => AlegoProduct::PREPAID_CARD_VIETNAMEMOBILE,
+        ]
+    ];
+
+    // input
     $telco = $_POST['telco'];
     $type = AlegoTransactionType::BUY_PREPAID_CARD;
     $cardPrice = $_POST['cardPrice'];
     $cardQuantity = $_POST['cardQuantity'];
 
-    $products = [
-        AlegoTransactionType::BUY_PREPAID_CARD => [
-            Telco::VIETTEL_CODE => AlegoProduct::PREPAID_CARD_VIETTEL,
-            Telco::MOBIFONE_CODE => 501,
-            Telco::VINAPHONE_CODE => 502,
-            Telco::SFONE_CODE => 503,
-            Telco::GMobile_CODE => 504,
-            Telco::VIETNAMEMOBILE_CODE => 505,
-        ]
-    ];
 
+    // api account
+    // this below info is Alego account test, in production, use yours.
     $account = new \AlegoApiWrapper\Connection\Account(
         [
             'agentId' => 1,
@@ -33,8 +38,10 @@ if ($_POST) {
         ]
     );
 
-    $client = \AlegoApiWrapper\Client::createClient($account);
+    // create a client
+    $client = \AlegoApiWrapper\Client::createClient($account, true, 1);
 
+    // create a buy card object
     $buyCard = new BuyPrepaidCard(
         [
             'referNumber' => uniqid(),
@@ -47,12 +54,14 @@ if ($_POST) {
     );
 
     if ($type == AlegoTransactionType::BUY_PREPAID_CARD) {
+        // buy prepaid card
         $res = $client->buyPrepaidCard($buyCard);
     } else {
         $res = null;
     }
 
-    //var_dump($res);
+    echo "<pre>";
+    var_dump($res);
 
 } else {
     $product = $telco = $type = $cellphone = $cardPrice = $cardQuantity = null;
@@ -62,16 +71,19 @@ if ($_POST) {
 <form method="post">
     <table>
         <tr>
+            <td colspan="2">Mua thẻ điện thoại</td>
+        </tr>
+        <tr>
             <td>Nhà mạng</td>
             <td>
 
                 <select id="telco" name="telco">
-                    <option <?=($telco = Telco::VIETTEL_CODE ? 'selected' : "")?> value="VTT">Thẻ Viettel</option>
-                    <option <?=($telco = Telco::MOBIFONE_CODE ? 'selected' : "")?> value="VMS">Thẻ MobiFone</option>
-                    <option <?=($telco = Telco::VINAPHONE_CODE ? 'selected' : "")?> value="VNP">Thẻ VinaPhone</option>
-                    <option <?=($telco = Telco::VIETNAMEMOBILE_CODE ? 'selected' : "")?> value="VNM">Thẻ VietnamMobile</option>
-                    <option <?=($telco = Telco::GMobile_CODE ? 'selected' : "")?> value="GTEL">Thẻ Gmobile</option>
-                    <option <?=($telco = Telco::SFONE_CODE ? 'selected' : "")?> value="SFONE">Thẻ Sfone</option>
+                    <option <?=($telco == Telco::VIETTEL_CODE ? 'selected' : "")?> value="VTT">Viettel</option>
+                    <option <?=($telco == Telco::MOBIFONE_CODE ? 'selected' : "")?> value="VMS">MobiFone</option>
+                    <option <?=($telco == Telco::VINAPHONE_CODE ? 'selected' : "")?> value="VNP">VinaPhone</option>
+                    <option <?=($telco == Telco::VIETNAMEMOBILE_CODE ? 'selected' : "")?> value="VNM">VietnamMobile</option>
+                    <option <?=($telco == Telco::GMobile_CODE ? 'selected' : "")?> value="GTEL">Gmobile</option>
+                    <option <?=($telco == Telco::SFONE_CODE ? 'selected' : "")?> value="SFONE">Sfone</option>
                 </select>
             </td>
         </tr>

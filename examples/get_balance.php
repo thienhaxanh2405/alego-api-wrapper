@@ -1,6 +1,8 @@
 <?php
 require_once "../vendor/autoload.php";
 
+// api account
+// this below info is Alego account test, in production, use yours.
 $account = new \AlegoApiWrapper\Connection\Account(
     [
         'agentId' => 1,
@@ -11,6 +13,7 @@ $account = new \AlegoApiWrapper\Connection\Account(
 );
 
 // create client
-$client = \AlegoApiWrapper\Client::createClient($account, true);
+$client = \AlegoApiWrapper\Client::createClient($account, true, 1);
 
+echo "<pre>";
 var_dump($client->getBalance());

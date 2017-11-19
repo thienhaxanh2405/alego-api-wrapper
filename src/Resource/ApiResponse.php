@@ -29,18 +29,17 @@ class ApiResponse extends Resource implements
     } // end convert to time stamp
 
     /**
-     * Convert array card after json decode from EncData to Array PrepaidCard object
+     * Convert array card after json decode from EncData to Array needed card object
      *
      * @param string $apiAction
-     * @param array $arrayCard
+     * @param array $arrayCard card info after json decode from EncData
      *
-     * @return array
+     * @return array card object
      */
     private function processCards($apiAction, $arrayCard)
     {
         $cards = [];
         if ($apiAction == ApiAction::BUY_PREPAID_CARD) {
-
             if ($arrayCard) {
                 foreach ($arrayCard as $one) {
                     $cards[] = new PrepaidCard(
@@ -52,16 +51,70 @@ class ApiResponse extends Resource implements
                     );
                 }
             }
+        } elseif ($apiAction == ApiAction::BUY_GAME_CARD) {
+            // todo update on next versions
+        } elseif ($apiAction == ApiAction::BUY_PREPAID_CARD) {
+            // todo update on next versions
+        } elseif ($apiAction == ApiAction::BUY_BATTLE_NET_CARD) {
+            // todo update on next versions
         } else {
-            // do something
+            // do nothing
         }
 
         return $cards;
+    } // end process cards
+
+    /**
+     * Process result for $this->>result
+     *
+     * @param string $apiAction
+     * @param array $decryptData
+     *
+     * @return mixed|CardResult|Balance
+     * @throws \Exception
+     */
+    private function processResult($apiAction, $decryptData)
+    {
+        switch ($apiAction) {
+            // todo update Buy prepaid visa; Buy battle net card; Buy game card on next version
+            case ApiAction::BUY_PREPAID_CARD:
+            case ApiAction::PREPAID_TOPUP:
+            case ApiAction::POSTPAID_TOPUP:
+            case ApiAction::CHECK_ORDER:
+                $result = new CardResult(
+                    [
+                        'referNumber' => $decryptData['RefNumber'],
+                        'productCode' => $decryptData['ProductCode'],
+                        'alegoTransactionId' => $decryptData['TransID'],
+                        'time' => $this->convertToTimeStamp($decryptData['TransDate']),
+                        'responseType' => $decryptData['ResType'],
+                        'cardQuantity' => $decryptData['CardQuantity'],
+                        'cards' => $this->processCards($apiAction, $decryptData['CardInfo']),
+                    ]
+                );
+                break;
+            case ApiAction::GET_BALANCE :
+                $result = new Balance(
+                    [
+                        'balance' => $decryptData['balance'],
+                        'availableBalance' => $decryptData['available_balance'],
+                        'frozenBalance' => $decryptData['frozen_amount'],
+                    ]
+                );
+                break;
+            default:
+                throw new \Exception("Api action invalid to process return result");
+        } // end switch
+
+        return $result;
     } // end process card
 
     /**
+     * Process all properties of ApiResponse
+     *
      * @param string $apiAction refer to ApiAction
      * @param null $rawData
+     *
      */
     public function processData($apiAction, $rawData = null)
     {
@@ -77,19 +130,15 @@ class ApiResponse extends Resource implements
                 $decryptData = json_decode(RequestData::decrypt($jsonDecodeRawData['EncData']), true);
 
                 if ($decryptData) {
-                    $this->result = new CardResult(
-                        [
-                            'referNumber' => $decryptData['RefNumber'],
-                            'productCode' => $decryptData['ProductCode'],
-                            'alegoTransactionId' => $decryptData['TransID'],
-                            'time' => $this->convertToTimeStamp($decryptData['TransDate']),
-                            'responseType' => $decryptData['ResType'],
-                            'cardQuantity' => $decryptData['CardQuantity'],
-                            'cards' => $this->processCards($apiAction, $decryptData['CardInfo']),
-                        ]
-                    );
-                    $this->messageCode = Message::SUCCESS;
-                    $this->message = Message::getMessage(Message::SUCCESS);
+                    try {
+                        $this->result = $this->processResult($apiAction, $decryptData);
+
+                        $this->messageCode = Message::SUCCESS;
+                        $this->message = Message::getMessage(Message::SUCCESS);
+                    } catch (\Exception $e) {
+                        $this->messageCode = Message::ALEGO_RESPONSE_WITH_ERROR;
+                        $this->message = "Prcess result fail: ".$e->getMessage();
+                    }
                 } else {
                     $this->messageCode = Message::INVALID_JSON;
                     $this->message = Message::getMessage(Message::INVALID_JSON).": Result card";

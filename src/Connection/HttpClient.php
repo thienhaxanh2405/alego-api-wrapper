@@ -227,8 +227,6 @@ class HttpClient implements IHttpClient
         $this->isDebug = $isDebug;
     }
 
-
-
     /**
      * @param string $action
      * @param array  $serviceData
@@ -249,7 +247,9 @@ class HttpClient implements IHttpClient
                 // process response
                 $res->processData($action, $raw);
 
-                if ($this->isDebug === true) {
+                // todo this piece of code is quite stupid, need to rewrite =))
+                // should have debug modes: 0 - none; 1 - dump data; 2 write to log file; 3 - .... and something else.
+                if ($this->isDebug == 1) {
                     echo "<pre>";
                     print("Service data: ");
                     var_dump($serviceData);
