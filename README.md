@@ -19,7 +19,7 @@ Qua composer:
 
 ## Đối tượng (Object)
 - **\AlegoApiWrapper\Resource\Buy** Đối tượng truyền tham số cho các giao dịch. Phụ thuộc vào từng giao dịch, các tham số cần truyền vào có thể khác nhau.
-- **\AlegoApiWrapper\Resource\ApiResponse** Đối tượng chứa các thông tin trả về cho mỗi giao dịch bao gồm:
+- **\AlegoApiWrapper\Resource\ApiResponse** Đối tượng chứa các thông tin trả về cho mỗi giao dịch.
     - **message**: thông báo của giao dịch.
     - **messageCode**: mã thông báo.
     - **rawData**: dữ liệu thô được trả về từ API.
@@ -36,7 +36,7 @@ Qua composer:
     - **balance**: Tổng số dư.
     - **availableBalance**: Số dư khả dụng.
     - **frozenBalance**: Số dư bị đóng băng.
-- **\AlegoApiWrapper\Resource\PrepaidCard**: chứa thông tin thẻ cào địa thoại. Bao gồm:
+- **\AlegoApiWrapper\Resource\PrepaidCard**: chứa thông tin thẻ cào địa thoại.
     - **code**: mã nạp thẻ.
     - **serial**: seri thẻ.
     - **expirationDate**: ngày hết hạn thẻ.
