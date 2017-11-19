@@ -20,22 +20,22 @@ Qua composer:
 ## Đối tượng (Object)
 - **\AlegoApiWrapper\Resource\Buy** Đối tượng truyền tham số cho các giao dịch. Phụ thuộc vào từng giao dịch, các tham số cần truyền vào có thể khác nhau.
 - **\AlegoApiWrapper\Resource\ApiResponse** Đối tượng chứa các thông tin trả về cho mỗi giao dịch bao gồm:
-    1. **message**: thông báo của giao dịch.
-    2. **messageCode**: mã thông báo.
-    3. **rawData**: dữ liệu thô được trả về từ API.
-    4. **result**: đối tượng chứa thông tin trả về sau khi đã được xử lý từ rawData. Có thể là **_\AlegoApiWrapper\Resource\CardResult_** hoặc **_\AlegoApiWrapper\Resource\Balance_** tùy thuộc vào giao dịch hiện tại.
+    - **message**: thông báo của giao dịch.
+    - **messageCode**: mã thông báo.
+    - **rawData**: dữ liệu thô được trả về từ API.
+    - **result**: đối tượng chứa thông tin trả về sau khi đã được xử lý từ rawData. Có thể là **_\AlegoApiWrapper\Resource\CardResult_** hoặc **_\AlegoApiWrapper\Resource\Balance_** tùy thuộc vào giao dịch hiện tại.
 - **\AlegoApiWrapper\Resource\CardResult**: Chứa thông tin trả về khi mua thẻ điện thoại/topup/thẻ game/visa trả trước/kiểm tra giao dịch.
-    1. **productCode**: mã dịch vụ của Alego.
-    2. **$referOrder**: mã tham chiếu giao dịch trên hệ thống của bạn
-    3. **alegoTransactionId**: id của giao dịch tương ứng trên hệ thống Alego
-    4. **time**: thời gian giao dịch trên hệ thống Alego, định dạng unix timestamp.
-    5. **responseType**: Alego trả về kết quả thông qua: 1 - email; 2 - trực tiếp trong API. 
-    6. **cardQuantity**: số lượng thẻ.
-    7. **cards**: mảng chứa thông tin thẻ hoặc mảng rỗng. Mỗi phần tử của mảng là một đối tượng **_\AlegoApiWrapper\Resource\PrepaidCard_** hoặc Visa card trong tương lai khi wrapper hỗ trợ mua thẻ Visa trả trước.
+    - **productCode**: mã dịch vụ của Alego.
+    - **$referOrder**: mã tham chiếu giao dịch trên hệ thống của bạn
+    - **alegoTransactionId**: id của giao dịch tương ứng trên hệ thống Alego
+    - **time**: thời gian giao dịch trên hệ thống Alego, định dạng unix timestamp.
+    - **responseType**: Alego trả về kết quả thông qua: 1 - email; 2 - trực tiếp trong API. 
+    - **cardQuantity**: số lượng thẻ.
+    - **cards**: mảng chứa thông tin thẻ hoặc mảng rỗng. Mỗi phần tử của mảng là một đối tượng **_\AlegoApiWrapper\Resource\PrepaidCard_** hoặc Visa card trong tương lai khi wrapper hỗ trợ mua thẻ Visa trả trước.
 - **\AlegoApiWrapper\Resource\Balance**: Chứa thông tin số dư tài khoản đại lý.
-    1. **balance**: Tổng số dư.
-    2. **availableBalance**: Số dư khả dụng.
-    3. **frozenBalance**: Số dư bị đóng băng.
+    - **balance**: Tổng số dư.
+    - **availableBalance**: Số dư khả dụng.
+    - **frozenBalance**: Số dư bị đóng băng.
 - **\AlegoApiWrapper\Resource\PrepaidCard**: chứa thông tin thẻ cào địa thoại. Bao gồm:
     - **code**: mã nạp thẻ.
     - **serial**: seri thẻ.
@@ -51,7 +51,7 @@ Qua composer:
 1. Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
 Sử dụng thông tin kết nối để khởi tạo đối tượng Account.
 
-```php
+``` php
 
 use AlegoApiWrapper\Connection\Account;
 
@@ -155,11 +155,9 @@ Sử dụng mã referOrder trên hệ thống của bạn để tham chiếu t�
 
 Ví dụ bạn kiểm tra có mã trên hệ thống của bạn là: **_5a119e3c6cfb0_**
 
-```
-
+<code>
 $res = $client->checkOrder("5a119e3c6cfb0");
-
-```
+</code>
 
 ### Kiểm tra số dư tài khoản
 ```
@@ -177,5 +175,7 @@ Wrapper vẫn còn nhiều thiếu sót hoặc bug mà mình chưa tìm ra, các
 
 ## License
 Mình viết Wrapper này để phục vụ mục đích công việc cá nhân, tuy nhiên mình cũng không ngần ngại việc công khai và chia sẻ source này. Rất mong wrapper này sẽ có một chút hữu ích nào đó cho công việc của các bạn.
+
 Mọi việc chia sẻ, góp ý, phân phối lại source này vui lòng theo giấy phép MIT.
+
 _Trường hợp các bạn cứ thế lấy và sử dụng, cho vào project.... mà không theo giấy phép MIT thì mình cũng vẫn chào đón nhé =))_
