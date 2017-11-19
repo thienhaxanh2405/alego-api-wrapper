@@ -70,10 +70,6 @@ Khởi tạo đối tượng Client để thực hiện các giao dịch
 use AlegoApiWrapper\Client;
 
 $client = Client::createClient($account);
-// trong trường hợp bạn muốn chạy trên môi trường Development, 
-// bạn có thể thêm 2 tham số vào hàm sau $account cho hàm createClient
-// $isDevelopment = true và $debug = 1
-// $client = Client::createClient($account, true, 1);
 ```
 
 ## Sử dụng
