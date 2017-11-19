@@ -51,7 +51,6 @@ Qua composer:
 
 Bạn cần đăng ký tài khoản đại lý tại http://alego.vn. 
 Sử dụng thông tin kết nối để khởi tạo đối tượng Account.
-
 ```
 use AlegoApiWrapper\Connection\Account;
 
@@ -75,6 +74,7 @@ $client = Client::createClient($account);
 ## Sử dụng
 ### Mua thẻ cào điện thoại
 Khởi tạo một đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số
+
 - **referOrder**: mã tham chiếu trên hệ thống của bạn, có thể là id hoặc một mã đơn hàng **_duy nhất_** trên hệ thống của bạn tương ứng với giao dịch này.
 - **productCode**: mã sản phẩm dịch vủa Alego tương ứng với giao dịch mua thẻ cào. Đã được định nghĩa sẵn các hằng số trong **_AlegoApiWrapper\Constant\AlegoProduct_** để bạn có thể dễ dàng gọi và sử dụng.
 - **telco**:  mã nhà mạng. Đã được định nghĩa sẵn trong **_AlegoApiWrapper\Constant\Telco_**.
