@@ -1,7 +1,6 @@
 <?php
 require_once "../vendor/autoload.php";
 
-use AlegoApiWrapper\Constant\AlegoProduct;
 use AlegoApiWrapper\Constant\Telco;
 use AlegoApiWrapper\Constant\AlegoTransactionType;
 use AlegoApiWrapper\Resource\BuyPrepaidCard;
@@ -41,8 +40,10 @@ if ($_POST) {
         ]
     );
 
+    // create client
     $client = \AlegoApiWrapper\Client::createClient($account, true);
 
+    //
     $buyCard = new BuyPrepaidCard(
         [
             'referNumber' => uniqid(),

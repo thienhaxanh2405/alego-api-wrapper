@@ -12,6 +12,12 @@ use AlegoApiWrapper\Resource\BuyPrepaidCard;
 
 class Client implements IClient
 {
+    /** @var int $isDebug; 0 - none; 1 - dump data; */
+    private $isDebug = 0;
+
+    /**
+     * @var IHttpClient $httpClient
+     */
     private $httpClient;
 
     /**
@@ -19,23 +25,56 @@ class Client implements IClient
      *
      * @param IAuth $account
      * @param bool  $isDevelopment
+     * @param int $isDebug
      *
      * @return Client
      */
-    public static function createClient(IAuth $account, $isDevelopment = false)
+    public static function createClient(IAuth $account, $isDevelopment = false, $isDebug = 0)
     {
         if ($isDevelopment) {
-            return new self(new HttpClient($account, Api::DEVELOPMENT_BASE_URL));
+            return new self(new HttpClient($account, Api::DEVELOPMENT_BASE_URL, $isDebug));
         } else {
-            return new self(new HttpClient($account, Api::BASE_URL));
+            return new self(new HttpClient($account, Api::BASE_URL, $isDebug));
         }
 
     } // end create client
 
-    public function __construct(IHttpClient $httpRequest)
+    public function __construct(IHttpClient $httpRequest, $isDebug = 0)
     {
         $this->httpClient = $httpRequest;
+        $this->isDebug = $isDebug;
+    }
 
+    /**
+     * @return int
+     */
+    public function getIsDebug()
+    {
+        return $this->isDebug;
+    }
+
+    /**
+     * @param int $isDebug
+     */
+    public function setIsDebug($isDebug)
+    {
+        $this->isDebug = $isDebug;
+    }
+
+    /**
+     * @return IHttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    /**
+     * @param IHttpClient $httpClient
+     */
+    public function setHttpClient($httpClient)
+    {
+        $this->httpClient = $httpClient;
     } // end class
 
     /**

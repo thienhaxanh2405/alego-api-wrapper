@@ -29,6 +29,7 @@ class HttpClient implements IHttpClient
     /** @var array $sentData the data for api */
     private $sentData;
 
+    /** @var int $isDebug */
     private $isDebug;
 
     /**
@@ -282,12 +283,15 @@ class HttpClient implements IHttpClient
      *
      * @param IAuth  $auth
      * @param string $apiBaseUrl
+     * @param int $isDebug
      */
-    public function __construct(IAuth $auth, $apiBaseUrl = "")
+    public function __construct(IAuth $auth, $apiBaseUrl = "", $isDebug = 0)
     {
         if ($apiBaseUrl) {
             $this->apiBaseUrl = $apiBaseUrl;
         }
+
+        $this->isDebug = $isDebug;
 
         // just get account info and set into api request
         $this->apiRequest = new ApiRequest(
@@ -298,8 +302,6 @@ class HttpClient implements IHttpClient
                 'version' => Api::VERSION,
             ]
         );
-
-        $this->isDebug = true;
     } // end construct
 
 } // end class
