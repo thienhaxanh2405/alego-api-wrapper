@@ -11,6 +11,9 @@ class ApiResponse extends Resource implements
 {
     private $rawData;
 
+    /** @var string $tripleKey use for decrypt return data */
+    private $tripleKey;
+
     private $message;
 
     private $messageCode;
@@ -127,7 +130,10 @@ class ApiResponse extends Resource implements
         if ($jsonDecodeRawData) {
             if ($jsonDecodeRawData['RespCode'] == "00") {
                 // decrypt
-                $decryptData = json_decode(RequestData::decrypt($jsonDecodeRawData['EncData']), true);
+                $decryptData = json_decode(
+                    RequestData::decrypt($jsonDecodeRawData['EncData'], $this->tripleKey),
+                    true
+                );
 
                 if ($decryptData) {
                     try {
@@ -171,12 +177,34 @@ class ApiResponse extends Resource implements
     } // end construct
 
     /**
+     * ApiResponse destruct
+     */
+    public function __destruct()
+    {
+        // unset keyStripe
+        unset($this->tripleKey);
+    } // end destruct
+
+    /**
      * @param string $rawData
      */
     public function setRawData($rawData)
     {
         $this->rawData = $rawData;
     } // end set raw data
+
+    public function getRawData()
+    {
+        return $this->rawData;
+    } // end get raw data
+
+    /**
+     * @param string $keyTriple
+     */
+    public function setTripleKey($keyTriple)
+    {
+        $this->tripleKey = $keyTriple;
+    } // end get raw data
 
     /**
      * @param string $message

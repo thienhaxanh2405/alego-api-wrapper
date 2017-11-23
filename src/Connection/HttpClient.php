@@ -116,7 +116,7 @@ class HttpClient implements IHttpClient
         }
 
         // encrypt data
-        $encryptData = RequestData::encrypt(json_encode($serviceData));
+        $encryptData = RequestData::encrypt(json_encode($serviceData), $this->apiRequest->getTripleKey());
         $this->apiRequest->setEncryptData($encryptData);
 
         // check sum data
@@ -235,7 +235,7 @@ class HttpClient implements IHttpClient
      */
     public function request($action, $serviceData = [])
     {
-        $res = new ApiResponse();
+        $res = new ApiResponse("", ['tripleKey' => $this->apiRequest->getTripleKey()]);
         if ($this->validateData($action, $serviceData)) {
             try {
                 // prepare data
@@ -300,6 +300,7 @@ class HttpClient implements IHttpClient
                 'agentId' => $auth->getAgentId(),
                 'accountId' => $auth->getAccountId(),
                 'keyCheckSum' => $auth->getKeyMD5(),
+                'tripleKey' => $auth->getTripleKey(),
                 'version' => Api::VERSION,
             ]
         );

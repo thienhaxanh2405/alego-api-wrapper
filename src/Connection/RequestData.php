@@ -9,7 +9,7 @@ class RequestData
      *
      * @return string
      */
-    public static function encrypt($string, $seed = "1234567890123")
+    public static function encrypt($string, $seed = "your_triple_key")
     {
         $input = trim($string);
         $block = mcrypt_get_block_size('tripledes', 'ecb');
@@ -35,7 +35,7 @@ class RequestData
      *
      * @return bool|string
      */
-    public static function decrypt($string, $seed = "1234567890123")
+    public static function decrypt($string, $seed = "your_triple_key")
     {
         $input = base64_decode($string);
         $key = substr(md5($seed), 0, 24);

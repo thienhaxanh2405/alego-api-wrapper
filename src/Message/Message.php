@@ -38,7 +38,7 @@ class Message
         '17' => 'Tài khoản hoặc thuê bao nạp tiền không chính xác, giao dịch thất bại',
         '18' => 'Tài khoản hoặc thuê bao đang bị khóa, giao dịch thất bại',
         '97' => 'Kênh hiện chưa được khai báo vui lòng liên hệ Alego hỗ trợ',
-        '98' => 'Kết nối theo yêu cầ u không tồ n tại hoặc chưa được khai báo',
+        '98' => 'Kết nối theo yêu cầu không tồn tại hoặc chưa được khai báo',
         '99' => 'Lỗi không xác định',
         '111' => 'Mã giao dịch không tồn tại',
     ];

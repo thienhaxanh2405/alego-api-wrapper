@@ -5,10 +5,10 @@ require_once "../vendor/autoload.php";
 // this below info is Alego account test, in production, use yours.
 $account = new \AlegoApiWrapper\Connection\Account(
     [
-        'agentId' => 1,
-        'accountId' => '571a01a0e4b0b96b6f950ad5',
-        'keyMD5' => 'adrMjEJArHysrhwM',
-        'tripleKey' => 'asdf'
+        'agentId' => 20170623114701,
+        'accountId' => '594c9d45e4b01f4ae890ab02',
+        'keyMD5' => 'sw20FaMFtlfqkeEdtu',
+        'tripleKey' => 's3Fz2MS3KgGb89Ha9mlW2Phh'
     ]
 );
 

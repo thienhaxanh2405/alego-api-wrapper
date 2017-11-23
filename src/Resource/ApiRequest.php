@@ -19,6 +19,8 @@ class ApiRequest extends Resource implements IApiRequest
 
     private $keyCheckSum;
 
+    private $tripleKey;
+
     public function __construct($resources = null)
     {
         parent::__construct($resources);
@@ -134,7 +136,23 @@ class ApiRequest extends Resource implements IApiRequest
     public function setKeyCheckSum($keyCheckSum)
     {
         $this->keyCheckSum = $keyCheckSum;
-    } // end construct
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTripleKey()
+    {
+        return $this->tripleKey;
+    }
+
+    /**
+     * @param mixed $tripleKey
+     */
+    public function setTripleKey($tripleKey)
+    {
+        $this->tripleKey = $tripleKey;
+    }
 
     public function mapData()
     {

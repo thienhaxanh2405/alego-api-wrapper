@@ -40,7 +40,7 @@ if ($_POST) {
             'agentId' => 1,
             'accountId' => '571a01a0e4b0b96b6f950ad5',
             'keyMD5' => 'adrMjEJArHysrhwM',
-            'tripleKey' => 'asdf'
+            'tripleKey' => '1234567890123'
         ]
     );
 
