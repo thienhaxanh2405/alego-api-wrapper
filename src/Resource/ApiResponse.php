@@ -113,6 +113,14 @@ class ApiResponse extends Resource implements
     } // end process card
 
     /**
+     * Unset triple key
+     */
+    private function unsetTripeKey()
+    {
+        unset($this->tripleKey);
+    }
+
+    /**
      * Process all properties of ApiResponse
      *
      * @param string $apiAction refer to ApiAction
@@ -159,6 +167,9 @@ class ApiResponse extends Resource implements
             $this->messageCode = Message::INVALID_JSON;
             $this->message = Message::getMessage(Message::INVALID_JSON).": Raw data";
         }
+
+        // after this point, triple key no longer to be used
+        $this->unsetTripeKey();
     } // end process raw data
 
     /**
@@ -182,7 +193,7 @@ class ApiResponse extends Resource implements
     public function __destruct()
     {
         // unset keyStripe
-        unset($this->tripleKey);
+        $this->unsetTripeKey();
     } // end destruct
 
     /**
