@@ -56,8 +56,6 @@ class ApiResponse extends Resource implements
             }
         } elseif ($apiAction == ApiAction::BUY_GAME_CARD) {
             // todo update on next versions
-        } elseif ($apiAction == ApiAction::BUY_PREPAID_CARD) {
-            // todo update on next versions
         } elseif ($apiAction == ApiAction::BUY_BATTLE_NET_CARD) {
             // todo update on next versions
         } else {
@@ -83,6 +81,7 @@ class ApiResponse extends Resource implements
             case ApiAction::BUY_PREPAID_CARD:
             case ApiAction::PREPAID_TOPUP:
             case ApiAction::POSTPAID_TOPUP:
+            case ApiAction::BUY_GAME_CARD:
             case ApiAction::CHECK_ORDER:
                 $result = new CardResult(
                     [

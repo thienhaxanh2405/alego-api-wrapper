@@ -26,4 +26,15 @@ class AlegoProduct
     const TOPUP_POSTPAID_SFONE = 633;
     const TOPUP_POSTPAID_GMOBILE = 634;
     const TOPUP_POSTPAID_VIETNAMMOBILE = 635;
+
+    // game card
+    const GAME_PREPAID_CARD_V_COIN = 300;
+    const GAME_PREPAID_CARD_GATE = 301;
+    const GAME_PREPAID_CARD_SO_GARENA = 302;
+    const GAME_PREPAID_CARD_ZING = 303;
+    const GAME_PREPAID_CARD_ON_CASH = 305;
+    const GAME_PREPAID_CARD_GO_COIN = 304;
+    const GAME_PREPAID_CARD_MEGACARD = 306;
+    const GAME_PREPAID_CARD_VCARD = 307;
+
 } // end class

@@ -13,6 +13,10 @@ class Api
 
     const FUNCTION_POSTPAID_TOPUP = "buyPrepaidCards";
 
+    const FUNCTION_BUY_GAME_PREPAID_CARD = "buyPrepaidCards";
+
+    const FUNCTION_TOPUP_GAME = "buyPrepaidCards";
+
     const FUNCTION_CHECK_ORDER = "checkOrder";
 
     const FUNCTION_GET_BALANCE = "getBalance";

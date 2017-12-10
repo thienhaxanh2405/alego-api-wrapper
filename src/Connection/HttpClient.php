@@ -69,6 +69,16 @@ class HttpClient implements IHttpClient
                     return true;
                 }
                 break;
+            case ApiAction::BUY_GAME_CARD :
+                if (
+                    isset($serviceData['ProductCode'])
+                    && isset($serviceData['RefNumber'])
+                    && isset($serviceData['CardPrice'])
+                    && isset($serviceData['CardQuantity'])
+                ) {
+                    return true;
+                }
+                break;
             case ApiAction::CHECK_ORDER :
                 if (
                     isset($serviceData['RefNumber'])
@@ -104,6 +114,9 @@ class HttpClient implements IHttpClient
                 break;
             case ApiAction::PREPAID_TOPUP:
                 $this->apiRequest->setFunction(Api::FUNCTION_PREPAID_TOPUP);
+                break;
+            case ApiAction::BUY_GAME_CARD:
+                $this->apiRequest->setFunction(Api::FUNCTION_BUY_GAME_PREPAID_CARD);
                 break;
             case ApiAction::CHECK_ORDER:
                 $this->apiRequest->setFunction(Api::FUNCTION_CHECK_ORDER);

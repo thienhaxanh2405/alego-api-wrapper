@@ -13,6 +13,8 @@ class ApiAction
 
     const BUY_GAME_CARD = "buy_game_card";
 
+    const TOPUP_GAME = "topup_game";
+
     const BUY_BATTLE_NET_CARD = "buy_battle_net_card";
 
     const CHECK_ORDER = "check_order";

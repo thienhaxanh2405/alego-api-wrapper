@@ -9,4 +9,6 @@ class AlegoTransactionType
 
     const TOPUP_POSTPAID = "TELCO_TOPUP_AFTER";
 
+    const BUY_GAME_PREPAID_CARD = "";
+
 } // end class

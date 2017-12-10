@@ -142,6 +142,18 @@ class Client implements IClient
         return $this->httpClient->request(ApiAction::POSTPAID_TOPUP, $serviceData);
     } // end postpaid top up
 
+    public function buyGamePrepaidCard(Buy $buy)
+    {
+        $serviceData = [
+            'ProductCode' => $buy->getProductCode(),
+            'RefNumber' => $buy->getReferOrder(),
+            'CardPrice' => $buy->getCardPrice(),
+            'CardQuantity' => $buy->getCardQuantity(),
+        ];
+
+        return $this->httpClient->request(ApiAction::BUY_GAME_CARD, $serviceData);
+    } // end buy game prepaid card
+
     /**
      * @param $myReferNumber
      *
