@@ -149,6 +149,7 @@ class HttpClient implements IHttpClient
     } // end prepare data
 
     /**
+     * todo this function requires guzzlehttp package
      *
      * @param array  $sentData
      *
