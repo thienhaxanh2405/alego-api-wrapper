@@ -42,24 +42,24 @@ class ApiResponse extends Resource implements
     private function processCards($apiAction, $arrayCard)
     {
         $cards = [];
-        if ($apiAction == ApiAction::BUY_PREPAID_CARD) {
-            if ($arrayCard) {
-                foreach ($arrayCard as $one) {
-                    $cards[] = new PrepaidCard(
-                        [
-                            'code' => $one['card_code'],
-                            'serial' => $one['card_serial'],
-                            'expirationDate' => $one['expiration_date']
-                        ]
-                    );
+        switch ($apiAction) {
+            case ApiAction::BUY_PREPAID_CARD:
+            case $apiAction == ApiAction::BUY_GAME_CARD:
+                if ($arrayCard) {
+                    foreach ($arrayCard as $one) {
+                        $cards[] = new PrepaidCard(
+                            [
+                                'code' => $one['card_code'],
+                                'serial' => $one['card_serial'],
+                                'expirationDate' => $one['expiration_date']
+                            ]
+                        );
+                    }
                 }
-            }
-        } elseif ($apiAction == ApiAction::BUY_GAME_CARD) {
-            // todo update on next versions
-        } elseif ($apiAction == ApiAction::BUY_BATTLE_NET_CARD) {
-            // todo update on next versions
-        } else {
-            // do nothing
+                break;
+            case $apiAction == ApiAction::BUY_BATTLE_NET_CARD:
+                break;
+            default:
         }
 
         return $cards;

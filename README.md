@@ -38,7 +38,7 @@ Qua composer:
     - **balance**: Tổng số dư.
     - **availableBalance**: Số dư khả dụng.
     - **frozenBalance**: Số dư bị đóng băng.
-- **\AlegoApiWrapper\Resource\PrepaidCard**: chứa thông tin thẻ cào địa thoại.
+- **\AlegoApiWrapper\Resource\PrepaidCard**: chứa thông tin thẻ cào điện thoại, game.
     - **code**: mã nạp thẻ.
     - **serial**: seri thẻ.
     - **expirationDate**: ngày hết hạn thẻ.
@@ -133,7 +133,28 @@ $buy = new \AlegoApiWrapper\Resource\BuyPrepaidCard([
 $res = $client->prepaidTopUp($buy);
 ```
 ### Mua mã thẻ Game
-Cập nhật trong thời gian tới
+Khởi tạo đối tượng \AlegoApiWrapper\Resource\Buy, cần tối thiểu các tham số
+
+- **referOrder**: mã tham chiếu trên hệ thống của bạn, có thể là id hoặc một mã đơn hàng **_duy nhất_** trên hệ thống của bạn tương ứng với giao dịch này.
+- **productCode**: mã sản phẩm dịch vủa Alego tương ứng với giao dịch mua thẻ game. Đã được định nghĩa sẵn các hằng số trong **_AlegoApiWrapper\Constant\AlegoProduct_** để bạn có thể dễ dàng gọi và sử dụng.
+- **cardPrice**: mệnh giá thẻ cào. Với mỗi nhà cung cấp, mệnh giá có thể khác nhau, vui lòng xem thêm mệnh giá trong tài liệu hướng dẫn của Alego. Để tiện sử dụng, có thể sử dụng **_AlegoApiWrapper\Constant\PrepaidCardPrice_**.
+- **cardQuantity**: số lượng thẻ cần mua (số nguyên)
+
+Ví dụ mua mã thẻ FPT Gate mệnh giá 100.000đ
+```
+use AlegoApiWrapper\Constant\AlegoProduct;
+use AlegoApiWrapper\Resource\Buy;
+use AlegoApiWrapper\Constant\PrepaidCardPrice;
+
+$buy = new \AlegoApiWrapper\Resource\BuyPrepaidCard([
+    'referOrder' => uniqid(),
+    'productCode' => \AlegoApiWrapper\Constant\AlegoProduct::GAME_PREPAID_CARD_GATE,
+    'cardPrice' => \AlegoApiWrapper\Constant\PrepaidCardPrice::C_100,
+    'cardQuantity' => 1,
+]);
+
+$res = $client->buyGamePrepaidCard($buy);
+```
 
 ### Mua thẻ Visa trả trước
 Cập nhật trong thời gian tới
